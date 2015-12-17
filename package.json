@@ -1,0 +1,58 @@
+{
+  "name": "shooooort-frontend",
+  "version": "0.0.0",
+  "description": "A client for Shooooort URL shortener",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "gulp test",
+    "develop": "gulp develop",
+    "clean": "gulp clean",
+    "prepublish": "gulp prepublish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lzrski/shooooort-frontend.git"
+  },
+  "author": "Tadeusz Łazurski",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "coffee-reactify": "^4.0.0",
+    "coffee-script": "^1.10.0",
+    "del": "^2.0.2",
+    "exorcist": "^0.4.0",
+    "gulp": "gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cached": "^1.1.0",
+    "gulp-cjsx": "^3.0.0",
+    "gulp-cli": "gulpjs/gulp-cli#4.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-mocha": "^2.1.3",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylus": "^2.1.0",
+    "gulp-uglify": "^1.4.2",
+    "gulp-webserver": "^0.9.1",
+    "react-tools": "^0.13.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.5.0"
+  },
+  "dependencies": {
+    "error2": "^0.2.2",
+    "es5-shim": "^4.1.15",
+    "es6-promise": "^2.3.0",
+    "history": "^1.12.6",
+    "html5shiv": "afarkas/html5shiv",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-router": "^1.0.1",
+    "seamless-immutable": "^4.0.2",
+    "setimmediate": "^1.0.4",
+    "source-map-support": "^0.3.3",
+    "underscore.string": "^3.2.2",
+    "whatwg-fetch": "^0.9.0"
+  }
+}
