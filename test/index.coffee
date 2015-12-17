@@ -1,2 +1,2 @@
 describe "Shooooort URL shortener", ->
-  it "Is a jolly good shortener for URLs", -> yes
+  it "Is short and sweet", -> yes
