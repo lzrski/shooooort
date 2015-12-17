@@ -32,8 +32,17 @@ shortener = (state = initial, action) ->
 
       # TODO: Call API and handle response when it arrives by merging it with URL object
 
-      return state.merge urls: urls.concat { url, startDate: do Moment } 
+      return state.merge urls: urls.concat { url, startDate: do Moment }
 
+    when 'shortened'
+      {
+        index
+        data
+      }         = action
+      { urls }  = state
+      urls      = urls.set index, urls[index].merge data
+      return state.merge { urls }
+      
     else
       return state
 
