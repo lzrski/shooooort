@@ -1,0 +1,19 @@
+# FIXME: Befor starting you have to manually build upstream-api-client
+
+build       :
+  image       : node:4
+  command     : npm run prepublish
+  working_dir : /app
+  volumes     :
+    - .:/app
+  environment :
+    - NODE_ENV=staging
+
+web         :
+  image       : nginx
+  volumes     :
+    - ./upstream-api-reverse-proxy.conf:/etc/nginx/conf.d/upstream-api.conf
+    - ./build:/usr/share/nginx/html/
+  ports       :
+    - 80:80 # Port for serving the app
+    - 8080:8080 # Port for reverse proxy (adds CORS headers)
