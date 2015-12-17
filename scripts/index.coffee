@@ -13,9 +13,4 @@ console.log store.getState()
 
 # TODO: Move to test cases
 store.dispatch type: 'shorten', url: 'http://lazurski.pl/'
-store.dispatch type: 'different' # State should be the same
-store.dispatch type: 'shortened', index: 0, data:
-  shortcode     : 'abcd'
-  startDate     : do Moment
-  lastSeenDate  : null
-  redirectCount : 0
+store.dispatch type: 'shorten', url: 'http://lori2lori.rocks/'

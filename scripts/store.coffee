@@ -5,7 +5,6 @@ config        = require './config'
 Immutable     = require 'seamless-immutable'
 Moment        = require 'moment'
 
-
 ###
 The structure of state is following:
 
@@ -18,19 +17,73 @@ The structure of state is following:
     ]
 ###
 
+###
+
+Micro API client library
+
+Constructor takes a base url (e.g. http://gymia-shorty.herokuapp.com/) and returns an object with methods responsible for performing different API calls, (e.g. shorten).
+
+###
+URL = require 'url'
+API = (base) ->
+
+  headers = new Headers
+    'Content-Type': 'application/json'
+
+  return (
+    ###
+
+    shorten function takes an url to be shortened and returns a promise that respolves to API response from POST /shorten { url }.
+
+    ###
+    shorten: (url) ->
+      fetch (URL.resolve base, 'shorten'),
+        method  : 'post'
+        body    : JSON.stringify { url }
+        headers : headers
+
+    get_stats: (shortcode) ->
+      fetch (URL.resolve base, "#{shortcode}/stats"),
+        method  : 'get'
+        headers : headers
+  )
+
+api = API 'http://localhost:8080/' # TODO: Use config.api.url
+
+# Reducer function
 initial   = Immutable
   urls          : []
 
 shortener = (state = initial, action) ->
+  console.log action
+
   switch action.type
     when 'shorten'
       { url }   = action
       { urls }  = state
       index     = urls.length
+      shortcode = null
 
       # TODO: Validate data (use typecheck?)
 
-      # TODO: Call API and handle response when it arrives by merging it with URL object
+      Promise
+        .resolve api.shorten url
+
+        .then (res) -> do res.json
+
+        .then (data) ->
+          # Store shortcode in outer scope
+          { shortcode } = data
+
+        .then -> api.get_stats shortcode
+
+        .then (res) -> do res.json
+
+        .then (data) ->
+          Object.assign data, { url }, { shortcode }
+          store.dispatch {type: 'shortened', index, data}
+
+        .catch (error) -> throw error
 
       return state.merge urls: urls.concat { url, startDate: do Moment }
 
@@ -42,8 +95,10 @@ shortener = (state = initial, action) ->
       { urls }  = state
       urls      = urls.set index, urls[index].merge data
       return state.merge { urls }
-      
+
     else
       return state
 
-module.exports = createStore shortener
+store = createStore shortener
+
+module.exports = store
