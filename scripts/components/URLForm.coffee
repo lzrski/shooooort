@@ -1,4 +1,5 @@
 React         = require 'react'
+{ dispatch }  = require '../store'
 
 ###
 
@@ -8,7 +9,6 @@ Must this component must stateful?
 
 module.exports = class URLForm extends React.Component
   render: ->
-    console.dir @props
     <form
       onSubmit = { (event) =>
         do event.preventDefault
@@ -16,7 +16,7 @@ module.exports = class URLForm extends React.Component
         { input }   = @refs
         url         = input.value
         input.value = ""
-        console.log url
+        dispatch  { type: 'shorten', url }
       }
     >
       <input
