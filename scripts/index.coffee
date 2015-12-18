@@ -1,21 +1,11 @@
-{ render }    = require 'react-dom'
-React         = require 'react'
-Clipboard     = require 'clipboard'
-
+# State store
 store         = require './store'
+
+# Helper functions
 persist       = require './persist'
 refresh       = require './refresh'
-App           = require './components/App'
+render        = require './render'
 
-persist store
-refresh store
-
-container = document.getElementById 'app'
-update    = ->
-  state = store.getState()
-  render <App {...state} />, container, -> new Clipboard 'a.shortened'
-
-
-store.subscribe update
-
-do update
+persist store # Setup persistence with localStorage
+refresh store # Refresh URL stats every minute
+render  store # Render React components now and on every state change 
