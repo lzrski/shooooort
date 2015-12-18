@@ -91,6 +91,9 @@ shortener = (state = initial, action) ->
       { urls } = action
       return state.merge { urls }
 
+    when 'reset'
+      return state.merge urls: []
+
     else
       return state
 
