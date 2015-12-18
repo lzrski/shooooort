@@ -38,12 +38,13 @@ module.exports = (props) ->
               lastSeenDate
               redirectCount
             }     = item
-            short = URL.resolve config.api.url, shortcode
 
             <tr key = {key}>
               <td>
                 {
                   if shortcode?
+                    short = URL.resolve config.api.url, shortcode
+
                     ###
 
                     Clipboard magic works thanks to https://zenorocha.github.io/clipboard.js/
@@ -52,8 +53,9 @@ module.exports = (props) ->
                     ###
                     <a
                       className = 'shortened'
-                      href      = ''
+                      href      = { short }
                       data-clipboard-text = { short }
+                      onClick   = { (event) -> do event.preventDefault }
                     >
                       {config.api.url}<strong>{shortcode}</strong>
                       <label>click to copy this link</label>
