@@ -39,12 +39,17 @@ module.exports = (props) ->
               redirectCount
             }     = item
             short = URL.resolve config.api.url, shortcode
-            # TODO: Investigate https://zenorocha.github.io/clipboard.js/
 
             <tr key = {key}>
               <td>
                 {
                   if shortcode?
+                    ###
+
+                    Clipboard magic works thanks to https://zenorocha.github.io/clipboard.js/
+                    See also render callback in index module, where the clipboard is setup.
+
+                    ###
                     <a
                       className = 'shortened'
                       href      = ''
