@@ -71,6 +71,15 @@ shortener = (state = initial, action) ->
         data
       }         = action
       { urls }  = state
+
+      ###
+
+      startDate and lastSeenDate are coming as Strings. We want Moments for easy manipulation and localization.
+
+      ###
+      for key in ['startDate', 'lastSeenDate']
+        data[key] = Moment data[key]
+
       urls      = urls.set index, urls[index].merge data
       return state.merge { urls }
 
