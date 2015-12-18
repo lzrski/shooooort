@@ -45,6 +45,7 @@
     "history": "^1.13.1",
     "html5shiv": "afarkas/html5shiv",
     "lodash": "^3.10.1",
+    "lodash.map": "^3.1.4",
     "moment": "^2.10.6",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
