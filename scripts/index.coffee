@@ -1,16 +1,14 @@
 store         = require './store'
-Moment        = require 'moment'
+App           = require './components/App'
+{ render }    = require 'react-dom'
+React         = require 'react'
 
-store.subscribe ->
-  { urls } = store.getState()
-  console.log '==>'
-  for url, index  in urls
-    console.log index
-    for own key, value of url
-      console.log "#{key}: #{value}"
+container = document.getElementById 'app'
 
-console.log store.getState()
+refresh   = ->
+  state = store.getState()
+  render <App {...state} />, container
 
-# TODO: Move to test cases
-store.dispatch type: 'shorten', url: 'http://lazurski.pl/'
-store.dispatch type: 'shorten', url: 'http://lori2lori.rocks/'
+store.subscribe refresh
+
+do refresh
