@@ -20,9 +20,9 @@ The structure of `state` is following:
 
 ###
 
-api = API config.api.url
+api     = API config.api.url
 
-initial   = Immutable
+initial = Immutable
   urls          : []
 
 ###
@@ -85,6 +85,10 @@ shortener = (state = initial, action) ->
       ###
 
       urls      = urls.set index, urls[index].merge data
+      return state.merge { urls }
+
+    when 'load'
+      { urls } = action
       return state.merge { urls }
 
     else
