@@ -1,1 +1,40 @@
 // TODO: Add styles here
+
+// Colors
+light-bg     = #EAEAEA
+disabled-bg  = #E0E0E0
+
+primary      = #555555
+secondary    = #AAAAAA
+unimportant  = #CCCCCC
+disabled     = #BFBFBF
+accent       = #EB4A42
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,300')
+
+body
+  max-width    800px
+  margin       auto
+
+  background   light-bg
+  color        primary
+
+  font-family  'Roboto', sans-serif
+  font-weight  light
+  font-size    16px
+
+header
+  display         flex
+  justify-content space-between
+  align-items     baseline
+  flex-wrap       wrap
+
+  h1
+    font-family  'Montserrat', sans-serif
+    font-size    47px
+    color        accent
+    text-decoration underline
+
+  h2
+    color       unimportant
