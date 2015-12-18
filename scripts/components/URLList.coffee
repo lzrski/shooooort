@@ -28,6 +28,7 @@ module.exports = (props) ->
           <th>Last visited</th>
         </tr>
       </thead>
+      <tbody>
         {
           map urls, (item, key) ->
             {
@@ -72,7 +73,6 @@ module.exports = (props) ->
               </td>
             </tr>
         }
-      <tbody>
       </tbody>
     </table>
   </div>
