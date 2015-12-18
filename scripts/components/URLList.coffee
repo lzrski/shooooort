@@ -2,44 +2,77 @@ React         = require 'react'
 map           = require 'lodash.map'
 Moment        = require 'moment'
 config        = require './config'
+{ dispatch }  = require '../store'
 
 module.exports = (props) ->
   { urls } = props
-  <table>
-    <thead>
-      <tr>
-        <th>Link</th>
-        <th>Visits</th>
-        <th>Last visited</th>
-      </tr>
-    </thead>
-      {
-        map urls, (item, key) ->
-          {
-            url
-            shortcode
-            lastSeenDate
-            redirectCount
-          }     = item
-          short = "#{config.api.url}/#{shortcode}"
+  <div className = "url-list">
+    <header>
+      <h3>Previously shortened by you</h3>
+      <button
+        className = "reset"
+        onClick   = { ->
+          # TODO: Confirmation dialog?
+          dispatch type: 'reset'
+        }
+      >
+        Clear history
+      </button>
+    </header>
 
-          <tr key = {key}>
-            <td>
-              <a href = {short} target="_blank">{short}</a>
-              <br />
-              {url}
-            </td>
-            <td>
-              {redirectCount}
-            </td>
-            <td>
-              {
-                if lastSeenDate then (Moment lastSeenDate).fromNow()
-                else "Not visited yet."
-              }
-            </td>
-          </tr>
-      }
-    <tbody>
-    </tbody>
-  </table>
+    <table>
+      <thead>
+        <tr>
+          <th>Link</th>
+          <th>Visits</th>
+          <th>Last visited</th>
+        </tr>
+      </thead>
+        {
+          map urls, (item, key) ->
+            {
+              url
+              shortcode
+              lastSeenDate
+              redirectCount
+            }     = item
+
+            short =
+
+            <tr key = {key}>
+              <td>
+                {
+                  if shortcode?
+                    <a
+                      className = 'shortened'
+                      href      = "#{config.api.url}/#{shortcode}"
+                      target    = "_blank"
+                    >
+                      {config.api.url}<strong>{shortcode}</strong>
+                      <label>click to copy this link</label>
+                    </a>
+                  else
+                    <div className = "loading">Shortening</div>
+                }
+                <a
+                  className = "original"
+                  href      = { url }
+                  target    = "_blank"
+                >
+                  { url }
+                </a>
+              </td>
+              <td>
+                {redirectCount}
+              </td>
+              <td>
+                {
+                  if lastSeenDate then (Moment lastSeenDate).fromNow()
+                }
+              </td>
+            </tr>
+        }
+      <tbody>
+      </tbody>
+    </table>
+  </div>

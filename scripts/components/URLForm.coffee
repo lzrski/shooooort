@@ -24,5 +24,5 @@ module.exports = class URLForm extends React.Component
         ref         = 'input'
         placeholder = 'please enter URL to be shortened here'
       />
-      <button>Shorten</button>
+      <button>Shorten this link</button>
     </form>
