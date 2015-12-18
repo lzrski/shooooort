@@ -22,7 +22,7 @@ body
   color        primary
 
   font-family  'Roboto', sans-serif
-  font-weight  light
+  font-weight  lighter
   font-size    16px
 
 header
@@ -37,6 +37,7 @@ header
 
   h1
     font-family  'Montserrat', sans-serif
+    font-weight  normal
     font-size    47px
     color        accent
     text-decoration underline
@@ -70,3 +71,59 @@ form
     &:disabled
       background disabled-bg
       color      disabled
+
+.url-list
+  header
+    display         flex
+    justify-content flex-start
+
+    h3
+      font-size       22px
+      font-weight     lighter
+
+    button
+      margin           16px
+      background       none
+      border           none
+      color            accent
+      font-size        inherit
+
+  table
+    width             100%
+
+    th
+      font-weight     normal
+      text-transform  uppercase
+      font-size       14px
+      text-align      left
+      color           secondary
+
+    td
+      padding         16px 0
+
+      a
+        display         block
+        text-decoration none
+        font-weight     normal
+
+        &.original
+          color           unimportant
+
+        &.shortened
+          color           primary
+
+          strong
+            color         accent
+            font-weight   inherit
+
+          label
+            margin-left    32px
+            color          accent
+            font-weight    lighter
+
+            pointer-events none
+            opacity        0
+            transition     opacity 500ms
+
+          &:hover label
+            opacity       1
