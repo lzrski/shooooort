@@ -3,6 +3,7 @@ map           = require 'lodash.map'
 Moment        = require 'moment'
 config        = require './config'
 { dispatch }  = require '../store'
+URL           = require 'url'
 
 module.exports = (props) ->
   { urls } = props
@@ -37,7 +38,7 @@ module.exports = (props) ->
               lastSeenDate
               redirectCount
             }     = item
-
+            short = URL.resolve config.api.url, shortcode
             # TODO: Investigate https://zenorocha.github.io/clipboard.js/
 
             <tr key = {key}>
@@ -46,8 +47,8 @@ module.exports = (props) ->
                   if shortcode?
                     <a
                       className = 'shortened'
-                      href      = "#{config.api.url}/#{shortcode}"
-                      target    = "_blank"
+                      href      = ''
+                      data-clipboard-text = { short }
                     >
                       {config.api.url}<strong>{shortcode}</strong>
                       <label>click to copy this link</label>

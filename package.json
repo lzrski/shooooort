@@ -39,6 +39,7 @@
     "watchify": "^3.5.0"
   },
   "dependencies": {
+    "clipboard": "^1.5.5",
     "error2": "^0.2.2",
     "es5-shim": "^4.1.15",
     "es6-promise": "^2.3.0",
