@@ -13,8 +13,8 @@ The structure of `state` is following:
     urls          : [
       shortcode     : <Maybe String>
       url           : <String, URL>
-      startDate     : <Moment>
-      lastSeenDate  : <Maybe Moment, date>
+      startDate     : <String, date>
+      lastSeenDate  : <Maybe String, date>
       redirectCount : <Maybe Number>
     ]
 
@@ -63,7 +63,8 @@ shortener = (state = initial, action) ->
 
         .catch (error) -> throw error
 
-      return state.merge urls: urls.concat { url, startDate: do Moment }
+      startDate = (do Moment).format()
+      return state.merge urls: urls.concat { url, startDate }
 
     when 'shortened'
       {
@@ -74,11 +75,14 @@ shortener = (state = initial, action) ->
 
       ###
 
+      TODO: Moment objects do not survive casting to Immutable. Discard seamless-immutable?
+
       startDate and lastSeenDate are coming as Strings. We want Moments for easy manipulation and localization.
 
+          for key in ['startDate', 'lastSeenDate']
+            data[key] = Moment data[key]
+
       ###
-      for key in ['startDate', 'lastSeenDate']
-        data[key] = Moment data[key]
 
       urls      = urls.set index, urls[index].merge data
       return state.merge { urls }
