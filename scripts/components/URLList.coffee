@@ -37,7 +37,7 @@ module.exports = (props) ->
               redirectCount
             }     = item
 
-            short =
+            # TODO: Investigate https://zenorocha.github.io/clipboard.js/
 
             <tr key = {key}>
               <td>
