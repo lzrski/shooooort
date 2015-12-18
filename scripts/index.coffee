@@ -3,7 +3,7 @@ Moment        = require 'moment'
 
 store.subscribe ->
   { urls } = store.getState()
-  console.log '==='
+  console.log '==>'
   for url, index  in urls
     console.log index
     for own key, value of url

@@ -4,9 +4,11 @@ config        = require './config'
 }             = require 'redux'
 Immutable     = require 'seamless-immutable'
 Moment        = require 'moment'
+API           = require './API'
 
 ###
-The structure of state is following:
+
+The structure of `state` is following:
 
     urls          : [
       shortcode     : <Maybe String>
@@ -15,47 +17,23 @@ The structure of state is following:
       lastSeenDate  : <Maybe Moment, date>
       redirectCount : <Maybe Number>
     ]
-###
 
 ###
 
-Micro API client library
+api = API config.api.url
 
-Constructor takes a base url (e.g. http://gymia-shorty.herokuapp.com/) and returns an object with methods responsible for performing different API calls, (e.g. shorten).
-
-###
-URL = require 'url'
-API = (base) ->
-
-  headers = new Headers
-    'Content-Type': 'application/json'
-
-  return (
-    ###
-
-    shorten function takes an url to be shortened and returns a promise that respolves to API response from POST /shorten { url }.
-
-    ###
-    shorten: (url) ->
-      fetch (URL.resolve base, 'shorten'),
-        method  : 'post'
-        body    : JSON.stringify { url }
-        headers : headers
-
-    get_stats: (shortcode) ->
-      fetch (URL.resolve base, "#{shortcode}/stats"),
-        method  : 'get'
-        headers : headers
-  )
-
-api = API 'http://localhost:8080/' # TODO: Use config.api.url
-
-# Reducer function
 initial   = Immutable
   urls          : []
 
+###
+
+Reducer function (here named `shortener`) holds most of the logic of the app.
+
+SEE: https://github.com/rackt/redux#the-gist
+
+###
 shortener = (state = initial, action) ->
-  console.log action
+  console.log "<== #{action.type}"
 
   switch action.type
     when 'shorten'
@@ -99,6 +77,11 @@ shortener = (state = initial, action) ->
     else
       return state
 
+###
+
+Store is responsible for dispatching actions and supplying state to UI components. See `index` module.
+
+###
 store = createStore shortener
 
 module.exports = store

@@ -31,10 +31,14 @@ config = ->
       # Set API url depending on NODE_ENV
       url     : switch NODE_ENV
         when 'development'
+          # Use local reverse proxy server. See docker-copose.yml.
           'http://localhost:8080/'
         when 'staging'
+          # Use public reverse proxy server.
           'http://shooooort.lazurski.pl/'
         else
+          # This will only work if app is served from the same domain (CORS)
+          # Otherwise make sure to set NODE_ENV to staging
           'http://gymia-shorty.herokuapp.com/'
 
   stream = new Readable
