@@ -89,6 +89,18 @@ shortener = (state = initial, action) ->
 
     when 'load'
       { urls } = action
+
+      ###
+
+      Drop urls without shortcode generated before persisting.
+
+      This can happen if user close (or refresh) the page after adding an URL (shorten action) but before it gets shortened (shortened action).
+
+      It would leave the app in inconsistent state and there is no easy recovery from that. Better just drop them.
+
+      ###
+      urls = urls.filter ({shortcode}) -> shortcode?
+
       return state.merge { urls }
 
     when 'reset'
