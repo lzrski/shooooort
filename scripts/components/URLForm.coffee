@@ -16,6 +16,7 @@ module.exports = class URLForm extends React.Component
         { input }   = @refs
         url         = input.value
         input.value = ""
+        @setState valid: no
         dispatch  { type: 'shorten', url }
       }
     >
@@ -23,6 +24,14 @@ module.exports = class URLForm extends React.Component
         type        = 'text'
         ref         = 'input'
         placeholder = 'please enter URL to be shortened here'
+        onChange    = { (event) =>
+          @setState valid: Boolean @refs.input.value.trim().length
+        }
       />
-      <button>Shorten this link</button>
+      <button disabled = { not @state.valid }>Shorten this link</button>
     </form>
+
+  constructor: (props) ->
+    super props
+
+    @state = valid: no
