@@ -83,9 +83,11 @@ gulp.task 'frontend', ->
     .bundle()
     .on 'error', (error) ->
       throw error
-    .pipe exorcist './build/frontend/bundle.js.map'
     .pipe source 'bundle.js'
     .pipe buffer()
+    .pipe sourcemaps.init loadMaps: yes
+    .pipe uglify()
+    .pipe sourcemaps.write '.'
     .pipe gulp.dest './build/frontend/'
 
 # Backend is mostly the same as frontend, but it just get's compiled from cjsx.
