@@ -35,7 +35,7 @@ config = ->
           'http://localhost:8080/'
         when 'staging'
           # Use public reverse proxy server.
-          'http://shooooort.lazurski.pl/'
+          'http://api.shooooort.lazurski.pl/'
         else
           # This will only work if app is served from the same domain (CORS)
           # Otherwise make sure to set NODE_ENV to staging
