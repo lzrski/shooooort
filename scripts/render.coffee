@@ -14,11 +14,11 @@ App           = require './components/App'
 
 module.exports = (store) ->
   { getState, subscribe } = store
-  
+
   container = document.getElementById 'app'
   update    = ->
     state = store.getState()
-    render <App {...state} />, container, -> new Clipboard 'a.shortened'
+    render <App {...state} />, container, -> new Clipboard 'a.url'
 
   store.subscribe update
   do update

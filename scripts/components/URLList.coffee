@@ -53,6 +53,7 @@ module.exports = (props) ->
 
                     ###
                     <a
+                      className = "url"
                       href      = { short }
                       data-clipboard-text = { short }
                       onClick   = { (event) -> do event.preventDefault }
