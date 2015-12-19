@@ -4,6 +4,7 @@ Moment        = require 'moment'
 config        = require './config'
 { dispatch }  = require '../store'
 URL           = require 'url'
+{ truncate }  = require 'underscore.string'
 
 module.exports = (props) ->
   { urls } = props
@@ -52,23 +53,25 @@ module.exports = (props) ->
 
                     ###
                     <a
-                      className = 'shortened'
                       href      = { short }
                       data-clipboard-text = { short }
                       onClick   = { (event) -> do event.preventDefault }
                     >
-                      {config.api.url}<strong>{shortcode}</strong>
                       <label>click to copy this link</label>
+                      <div className = 'shortened'>
+                        {config.api.url}
+                        <strong>{shortcode}</strong>
+                      </div>
+                      <div className = "original">{ truncate url, 48 }</div>
                     </a>
                   else
                     <div className = "loading">Shortening</div>
                 }
                 <a
-                  className = "original"
+
                   href      = { url }
                   target    = "_blank"
                 >
-                  { url }
                 </a>
               </td>
               <td>

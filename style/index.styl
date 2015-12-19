@@ -94,6 +94,7 @@ form
 
   table
     width             100%
+    border-spacing    8px
 
     th
       font-weight     normal
@@ -106,28 +107,37 @@ form
       padding         16px 0
 
       a
-        display         block
+        // display         flex
+        // justify-content space-between
+        // flex-wrap       wrap
+
         text-decoration none
         font-weight     normal
 
-        &.original
-          color           unimportant
-
-        &.shortened
+        .shortened
           color           primary
 
           strong
             color         accent
             font-weight   inherit
 
-          label
-            margin-left    32px
-            color          accent
-            font-weight    lighter
+        label
+          float          right
+          padding        0 16px
+          color          accent
+          font-weight    lighter
 
-            pointer-events none
-            opacity        0
-            transition     opacity 500ms
+          pointer-events none
+          opacity        0
+          transition     opacity 500ms
 
-          &:hover label
-            opacity       1
+        &:hover label
+          opacity       1
+
+        .original
+          color           unimportant
+          clear           both
+          // TODO: Make text overflow work
+          // text-overflow   ellipsis
+          // white-space     nowrap
+          // overflow        hidden
