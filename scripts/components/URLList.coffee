@@ -58,7 +58,7 @@ module.exports = (props) ->
                       data-clipboard-text = { short }
                       onClick   = { (event) -> do event.preventDefault }
                     >
-                      <label>click to copy this link</label>
+                      <label>Click to copy this link</label>
                       <div className = 'shortened'>
                         {config.api.url}
                         <strong>{shortcode}</strong>

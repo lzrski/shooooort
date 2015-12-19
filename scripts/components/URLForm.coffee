@@ -23,7 +23,7 @@ module.exports = class URLForm extends React.Component
       <input
         type        = 'text'
         ref         = 'input'
-        placeholder = 'please enter URL to be shortened here'
+        placeholder = 'Paste the link you want to shortened here'
         onChange    = { (event) =>
           @setState valid: Boolean @refs.input.value.trim().length
         }
