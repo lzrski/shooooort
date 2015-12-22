@@ -1,37 +1,32 @@
 React         = require 'react'
 { dispatch }  = require '../store'
 
-###
+module.exports = () ->
+  input   = null
+  button  = null
 
-Must this component must stateful?
+  <form
+    onSubmit = { (event) =>
+      do event.preventDefault
 
-###
-
-module.exports = class URLForm extends React.Component
-  render: ->
-    <form
-      onSubmit = { (event) =>
-        do event.preventDefault
-
-        { input }   = @refs
-        url         = input.value
-        input.value = ""
-        @setState valid: no
-        dispatch  { type: 'shorten', url }
+      url         = input.value
+      input.value = ""
+      button.disabled = yes
+      dispatch  { type: 'shorten', url }
+    }
+  >
+    <input
+      type        = 'text'
+      ref         = { (element) -> input = element }
+      placeholder = 'Paste the link you want to shortened here'
+      onChange    = { (event) =>
+        button.disabled = not input.value.trim().length
       }
+    />
+    <button
+      disabled = { yes }
+      ref      = { (element) -> button = element }
     >
-      <input
-        type        = 'text'
-        ref         = 'input'
-        placeholder = 'Paste the link you want to shortened here'
-        onChange    = { (event) =>
-          @setState valid: Boolean @refs.input.value.trim().length
-        }
-      />
-      <button disabled = { not @state.valid }>Shorten this link</button>
-    </form>
-
-  constructor: (props) ->
-    super props
-
-    @state = valid: no
+      Shorten this link
+    </button>
+  </form>
