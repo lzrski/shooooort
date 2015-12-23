@@ -1,0 +1,65 @@
+table
+  display           block
+  width             100%
+
+  thead
+    display         none
+
+  tbody
+    display         block
+
+  tr
+    display         flex
+    flex-flow       row wrap
+    padding         16px 0
+
+  // Mobile first:
+  th, td
+    display         block
+    flex            0 0 50%
+
+    padding         4px 0
+    overflow        hidden
+
+
+    &:before
+      content      attr(data-label) ": "
+      color        unimportant
+
+    &.link
+      flex          0 0 100%
+
+      &:before
+        content     none
+
+    &.last-visited
+      text-align    right
+
+    .original
+      width         100%
+      overflow      hidden
+      text-overflow ellipsis
+      white-space   nowrap
+
+    label
+      display       none
+
+  @media all and (min-width 600px)
+    // Desktop and tablet
+    thead
+      display         block
+
+    th, td
+      // Each cell will take excacly 120px
+      flex            0 0 100px
+
+      &.link
+        // Link cell is not greedy, but will take whatever is left
+        flex          1 0 0px
+
+      &:before
+        // Do not display label (there's a table heading for this)
+        content       none
+
+      label
+        display       block

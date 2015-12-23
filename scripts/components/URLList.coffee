@@ -4,7 +4,6 @@ Moment        = require 'moment'
 config        = require './config'
 { dispatch }  = require '../store'
 URL           = require 'url'
-{ truncate }  = require 'underscore.string'
 
 module.exports = (props) ->
   { urls } = props
@@ -25,9 +24,9 @@ module.exports = (props) ->
     <table>
       <thead>
         <tr>
-          <th>Link</th>
-          <th>Visits</th>
-          <th>Last visited</th>
+          <th className = "link">Link</th>
+          <th className = "visits">Visits</th>
+          <th className = "last-visited">Last visited</th>
         </tr>
       </thead>
       <tbody>
@@ -41,7 +40,7 @@ module.exports = (props) ->
             }     = item
 
             <tr key = {key}>
-              <td>
+              <td className = "link">
                 {
                   if shortcode?
                     short = URL.resolve config.api.url, shortcode
@@ -63,7 +62,7 @@ module.exports = (props) ->
                         {config.api.url}
                         <strong>{shortcode}</strong>
                       </div>
-                      <div className = "original">{ truncate url, 48 }</div>
+                      <div className = "original">{ url }</div>
                     </a>
                   else
                     <div className = "loading">Shortening</div>
@@ -75,10 +74,10 @@ module.exports = (props) ->
                 >
                 </a>
               </td>
-              <td>
+              <td  className = 'visits' data-label = 'Visits'>
                 {redirectCount}
               </td>
-              <td>
+              <td className = 'last-visited' data-label = 'Last visit'>
                 {
                   if lastSeenDate then (Moment lastSeenDate).fromNow()
                 }

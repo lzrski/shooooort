@@ -52,7 +52,6 @@
     "seamless-immutable": "^4.1.1",
     "setimmediate": "^1.0.4",
     "source-map-support": "^0.3.3",
-    "underscore.string": "^3.2.2",
     "whatwg-fetch": "^0.9.0"
   }
 }
