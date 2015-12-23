@@ -103,10 +103,12 @@ gulp.task 'backend', ->
 gulp.task 'style', ->
   gulp
     .src './style/index.styl'
+    .pipe sourcemaps.init loadMaps: no
     .pipe stylus()
   	.pipe autoprefixer
     	browsers : [ '> 5%', 'last 5 versions' ]
     	cascade  : false
+    .pipe sourcemaps.write '.'
     .pipe gulp.dest './build/frontend'
 
 gulp.task 'assets', ->
